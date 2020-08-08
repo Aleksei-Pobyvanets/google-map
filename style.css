@@ -1,0 +1,11 @@
+.wrapper{
+    display: flex;
+    margin: auto;
+    width: 80%;
+    height: 550px;
+    padding: 5% 10% 0 10%;
+}
+#map {
+    height: 550px; 
+    width: 100%;
+   }
