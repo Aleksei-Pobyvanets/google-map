@@ -5,6 +5,10 @@ console.log("DOM fully loaded and parsed");
     const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let labelIndex = 0;
 
+function save() {
+  localStorage.setItem('markers', JSON.stringify(locations));
+  locations = JSON.parse(localStorage.getItem('markers'));
+}
 
     console.log(markers)
 
@@ -23,18 +27,13 @@ console.log("DOM fully loaded and parsed");
             title: "Van Munching Hall"
         });
     
-        markers[1]=new google.maps.Marker({
+        markers[1] = new google.maps.Marker({
             position: new google.maps.LatLng(38.9827089, -76.9475412),
             map: map,
             label: labels[labelIndex++ % labels.length],
             title: "The Smith Store",
         });
     
-        function setMapOnAll() {
-          for (let i = 1; i < markers.length; i++) {
-            markers[i].setMap();
-          }
-        }
 
         for (var i = 0; i < markers.length; i++) {
           
@@ -46,7 +45,10 @@ console.log("DOM fully loaded and parsed");
           
         
         function removeMar() {
-          setMapOnAll(mark)
+          console.log("sd")
+          for (var i = 1; i < markers.length; i++)
+          markers[i].setMap(null);
+          save()
         };
 
         map.addListener("click", event => {
@@ -56,18 +58,17 @@ console.log("DOM fully loaded and parsed");
         function addMarker(location, value) {
         const marker = new google.maps.Marker({
           position: location,
-          map: map,
           title: value,
           label: labels[labelIndex++ % labels.length],
           map: map,
       });
-
       markers[i].push(marker);
       console.log(marker.label)
       for (var i = 0; i < markers.length; i++) {
         var mark = markers[i]
         console.log(mark);
       }
+      save()
     }
     function alrt(value){
           var value = prompt("Please enter your text");
